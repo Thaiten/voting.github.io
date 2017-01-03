@@ -1,0 +1,39 @@
+<html>
+<head>
+  <link rel="stylesheet" href="css/vote.css" media="screen" title="no title">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+<script>
+function getVote(int) {
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject('Microsoft.XMLHTTP');
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById('poll').innerHTML=this.responseText;
+    }
+  }
+  xmlhttp.open('GET','poll_vote.php?vote='+int,true);
+  xmlhttp.send();
+}
+</script>
+</head>
+<body>
+<center>
+<div id='poll'>
+<h1>Wer ist deine Wahl?</h1>
+<form name="vote">
+<button class="box" name='vote' value='0' onclick='getVote(this.value)'>
+<img src="fm.png" alt="Freie Marktwirtschaft" width="150px"/>
+</button>
+<button class="box" id="box-2" name='vote' value='1' onclick="getVote(this.value)">
+<img src="zvm.png" alt="Zentralverwaltungswirtschaft" width="150px"/>
+</button>
+</form>
+<a href='logout.php' id="logout">Logout</a>
+</div>
+</center>
+</body>
+</html>
